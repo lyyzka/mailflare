@@ -4,12 +4,12 @@ export const BACKUP_SETTINGS_ID = "default";
 export const BACKUP_PREFIX = "backups/database";
 
 export class BackupWorkflowUnavailableError extends Error {
-	constructor() {
-		super(
-			"Database backups are unavailable because the DATABASE_BACKUP_WORKFLOW binding is missing. Deploy the app with `npm run deploy` so Wrangler applies the workflow configuration.",
-		);
-		this.name = "BackupWorkflowUnavailableError";
-	}
+  constructor() {
+    super(
+      "Database backups are unavailable because the optional DATABASE_BACKUP_WORKFLOW binding is not enabled. The default Deploy to Cloudflare profile omits Workflows so one-click deployment can complete; enable the Workflow separately if you need managed database backups.",
+    );
+    this.name = "BackupWorkflowUnavailableError";
+  }
 }
 
 export function getBackupWorkflowBinding(env: CloudflareEnv): BackupWorkflowBinding {
