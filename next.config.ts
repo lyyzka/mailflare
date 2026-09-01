@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 import { getSecurityHeaders } from "./src/lib/security/headers";
 
 const nextConfig: NextConfig = {
@@ -24,7 +25,7 @@ const nextConfig: NextConfig = {
 
 export default nextConfig;
 
-// Enable calling `getCloudflareContext()` in `next dev`.
-// See https://opennext.js.org/cloudflare/bindings#local-access-to-bindings.
-import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
-initOpenNextCloudflareForDev();
+// Only initialize the local Cloudflare dev shim for `next dev`.
+if (process.env.NODE_ENV === "development") {
+  initOpenNextCloudflareForDev();
+}
